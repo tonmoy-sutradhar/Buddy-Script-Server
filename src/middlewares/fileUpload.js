@@ -1,3 +1,4 @@
+// src/middlewares/fileUpload.js
 const multer = require("multer");
 const path = require("path");
 
@@ -35,7 +36,6 @@ module.exports = function (UPLOADS_FOLDER) {
         file.mimetype == "image/heif"
       ) {
         cb(null, true);
-
       } else {
         cb(new Error("Only jpg, png, jpeg format allowed!"));
       }

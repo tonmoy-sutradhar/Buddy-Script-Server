@@ -1,4 +1,4 @@
-// user.validation.js
+// src/validations/user.validation.js
 const Joi = require("joi");
 const { password, objectId } = require("./custom.validation");
 

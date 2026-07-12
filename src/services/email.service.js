@@ -1,3 +1,4 @@
+// src/services/email.service.js
 const nodemailer = require("nodemailer");
 const config = require("../config/config");
 const logger = require("../config/logger");
@@ -10,11 +11,10 @@ if (config.env !== "test") {
     .then(() => logger.info("Connected to email server"))
     .catch((err) =>
       logger.warn(
-        "Unable to connect to email server. Make sure you have configured the SMTP options in .env"
-      )
+        "Unable to connect to email server. Make sure you have configured the SMTP options in .env",
+      ),
     );
 }
-
 
 const sendEmail = async (to, subject, html) => {
   const msg = { from: config.email.from, to, subject, html };
@@ -81,7 +81,6 @@ const sendResetPasswordEmail = async (to, otp) => {
 `;
   await sendEmail(to, subject, html);
 };
-
 
 const sendVerificationEmail = async (to, token) => {
   const subject = "Email Verification";

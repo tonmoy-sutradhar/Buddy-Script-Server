@@ -1,3 +1,4 @@
+// src/middlewares/auth.js
 const passport = require("passport");
 const httpStatus = require("http-status");
 const ApiError = require("../utils/ApiError");
@@ -9,14 +10,13 @@ const verifyCallback =
   (req, resolve, reject, requiredRights) => async (err, user, info) => {
     if (err || info || !user) {
       return reject(
-        new ApiError(httpStatus.UNAUTHORIZED, "You are not authorized")
+        new ApiError(httpStatus.UNAUTHORIZED, "You are not authorized"),
       );
     }
     req.user = user;
 
-
     const { authorization } = req.headers;
-  
+
     let token;
     let activity;
     let decodedData;
@@ -24,13 +24,12 @@ const verifyCallback =
       token = authorization.split(" ")[1];
       decodedData = jwt.decode(token);
       activity = decodedData.activity;
-
     }
 
     if (requiredRights.length) {
       const userRights = roleRights.get(user.role);
       const hasRequiredRights = requiredRights.every((requiredRight) =>
-        userRights.includes(requiredRight)
+        userRights.includes(requiredRight),
       );
       if (!hasRequiredRights && req.params.userId !== user.id) {
         return reject(new ApiError(httpStatus.FORBIDDEN, "Forbidden"));
@@ -47,7 +46,7 @@ const auth =
       passport.authenticate(
         "jwt",
         { session: false },
-        verifyCallback(req, resolve, reject, requiredRights)
+        verifyCallback(req, resolve, reject, requiredRights),
       )(req, res, next);
     })
       .then(() => next())

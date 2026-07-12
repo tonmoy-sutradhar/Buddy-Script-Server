@@ -1,4 +1,4 @@
-// user.routes.js
+// src/routes/v1/user.routes.js
 
 const express = require("express");
 const auth = require("../../middlewares/auth");
