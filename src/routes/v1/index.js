@@ -4,6 +4,8 @@ const config = require("../../config/config");
 const authRoute = require("./auth.routes");
 const userRoute = require("./user.routes");
 const docsRoute = require("./docs.routes");
+const postRoute = require("./post.routes");
+const commentRoute = require("../comment.routes");
 
 const router = express.Router();
 
@@ -15,6 +17,14 @@ const defaultRoutes = [
   {
     path: "/users",
     route: userRoute,
+  },
+  {
+    path: "/posts",
+    route: postRoute,
+  },
+  {
+    path: "/comments",
+    route: commentRoute,
   },
 ];
 
