@@ -25,8 +25,6 @@ const postSchema = mongoose.Schema(
       default: "public",
       index: true,
     },
-    // Denormalized counters — updated atomically via $inc whenever a like/comment
-    // is added or removed, so the feed never needs a COUNT/aggregate per post.
     likesCount: {
       type: Number,
       default: 0,
